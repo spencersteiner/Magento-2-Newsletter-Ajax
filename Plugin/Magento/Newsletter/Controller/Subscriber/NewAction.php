@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright © Spencer Steiner.
+ * See LICENSE.txt for license details.
+ */
 
 namespace SS\NewsletterAjax\Plugin\Magento\Newsletter\Controller\Subscriber;
 
@@ -54,17 +58,19 @@ class NewAction extends \Magento\Newsletter\Controller\Subscriber\NewAction
         Session $customerSession,
         StoreManagerInterface $storeManager,
         CustomerUrl $customerUrl,
-        CustomerAccountManagement $customerAccountManagement)
-    {
+        CustomerAccountManagement $customerAccountManagement
+    ) {
         $this->request = $request;
         $this->jsonFactory = $jsonFactory;
         $this->messageManager = $messageManager;
-        parent::__construct($context,
+        parent::__construct(
+            $context,
             $subscriberFactory,
             $customerSession,
             $storeManager,
             $customerUrl,
-            $customerAccountManagement);
+            $customerAccountManagement
+        );
     }
 
     /**
