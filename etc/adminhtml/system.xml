@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Spencer Steiner.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="ss_newsletter_ajax_tab" translate="label" sortOrder="50">
+            <label>SS</label>
+        </tab>
+        <section id="newsletterajax" translate="label" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50">
+            <class>separator-top</class>
+            <label>Newsletter Ajax</label>
+            <tab>ss_newsletter_ajax_tab</tab>
+            <resource>SS_NewsletterAjax::config</resource>
+            <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50">
+                <label>General Configuration</label>
+                <comment>
+                    Enabling the Newsletter Ajax option will change the default footer subscription field to use AJAX instead of reloading the page.
+                </comment>
+                
+                <field id="enable" translate="label" type="select" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

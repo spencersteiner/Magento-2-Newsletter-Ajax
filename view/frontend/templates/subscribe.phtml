@@ -1,0 +1,71 @@
+<div class="block newsletter">
+    <div class="title"><strong><?= $block->escapeHtml(__('Newsletter')) ?></strong></div>
+    <div class="content">
+        <form class="form subscribe"
+              novalidate
+              action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
+              method="post"
+              data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+              id="newsletter-validate-detail">
+            <div class="field newsletter">
+                <label class="label" for="newsletter"><span><?= $block->escapeHtml(__('Sign Up for Our Newsletter:')) ?></span></label>
+                <div class="control">
+                    <input name="email" type="email" id="newsletter"
+                           placeholder="<?= $block->escapeHtml(__('Enter your email address')) ?>"
+                           data-validate="{required:true, 'validate-email':true}"/>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="action subscribe primary" title="<?= $block->escapeHtmlAttr(__('Subscribe')) ?>" type="submit">
+                    <span><?= $block->escapeHtml(__('Subscribe')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="newsletter-modal"></div>
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal'
+    ], function ($, modal) {
+        $(function () {
+            let subscribeModal = modal({
+                type: 'popup',
+                title: 'Newsletter Subscription',
+                clickableOverlay: true,
+                buttons: [{
+                    text: 'Dismiss',
+                    click: function() {
+                        this.closeModal();
+                    }
+                }]
+            }, $('.newsletter-modal'));
+
+            let subscribeForm = $('.form.subscribe');
+
+            $(subscribeForm).on('submit', function(e) {
+                e.preventDefault();
+                let email = $('#newsletter').val();
+
+                if ($(subscribeForm).valid()) {
+                    $.ajax({
+                        url: 'newsletter/subscriber/new/',
+                        type: 'POST',
+                        data: {
+                            'email' : email
+                        },
+                        dataType: 'json',
+                        showLoader: true,
+                        complete: function(data, status) {
+                            let response = JSON.parse(data.responseText);
+                            $('.newsletter-modal').text(response.message).modal('openModal');
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
