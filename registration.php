@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © Spencer Steiner.
-* See LICENSE.txt for license details.
+ * See LICENSE.txt for license details.
  */
 
 use \Magento\Framework\Component\ComponentRegistrar;
